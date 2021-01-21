@@ -7,9 +7,42 @@
     <script src="/js/vue.min.js"></script>
 </head>
 <body class="exercicio">
+    <div id="app">
+        <p>{{ link }}</p>
+        <p><a href="{{ link }}">Canal não funciona</a></p>
+        
+        <p><a v-bind:href="link">Canal</a></p>
+        
+        <!-- forma reduzida de v-bind: -->
+        <p><a :href="link">Canal</a></p>
 
+        <p>
+            <input type="text" value="nome"><br />
+
+            <!-- atualiza em duas direções: 
+                altera o data.nome também -->
+            <input type="text" v-model="nome"><br />
+            
+            <input type="text" :value="nome"><br />
+            <span>{{ nome }}</span>
+        </p>
+    </div>
     <script>
-        // ...
+        new Vue({
+            el: "#app",
+            data: {
+                nome: "Maria",
+                link: "https://youtube.com/cod3rcursos"
+            },
+            watch: {
+
+                // sempre que nome é alterado
+                // a função é disparada
+                nome(novoValor) {
+                    console.log(novoValor)
+                }
+            }
+        })
     </script>
 </body>
 </html>
