@@ -7,9 +7,46 @@
     <script src="/js/vue.min.js"></script>
 </head>
 <body class="exercicio">
+    <div id="app">
+        <saudacao nome="Ana"></saudacao>
+        <saudacao nome="Bia"></saudacao>
+        <saudacao nome="Julia"></saudacao>
 
+        <contador></contador>
+        <contador></contador>
+    </div>
     <script>
-        // ...
+        Vue.component('saudacao', {
+            props: ['nome'],
+            template: `
+                <div>Bom dia, {{ nome }}!</div>
+            `
+        })
+
+        Vue.component('contador', {
+            // tem que usar o data como uma função
+            // para que em cada instância retorne um novo obj
+            data: function() {
+                return {
+                    contador: 0
+                }
+            },
+            methods: {
+                add() {
+                    this.contador++
+                }
+            },
+            template: `
+                <div>
+                    <span>{{ contador }}</span>
+                    <button @click="add">+1</button>
+                </div>
+            `
+        })
+
+        new Vue({
+            el: "#app"
+        })
     </script>
 </body>
 </html>
